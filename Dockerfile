@@ -1,16 +1,15 @@
 # Pull base image
-FROM resin/rpi-raspbian:jessie
-MAINTAINER Henrik Östman <trycoon@gmail.com>
+FROM ubuntu:18.04
+MAINTAINER Troels Vognsen <troels@trvo.dk>
 
-ENV OWFS_VERSION=3.1p5-1
+# ENV OWFS_VERSION=3.1p5-1
 
 # Setup external package-sources and install required softwares
-ADD owserver-pinning /etc/apt/preferences.d/owserver-pinning
-RUN echo "deb http://mirrordirector.raspbian.org/raspbian/ testing main contrib non-free rpi" | sudo tee /etc/apt/sources.list.d/owserver.list && \
-    apt-get update && apt-get install -t testing -y \
-    owserver=${OWFS_VERSION} \
-    ow-shell=${OWFS_VERSION} \
-    --no-install-recommends && \
+# ADD owserver-pinning /etc/apt/preferences.d/owserver-pinning
+RUN apt-get update && apt-get install -y \
+    owserver \
+    owhttpd \
+    ow-shell && \
     rm -rf /var/lib/apt/lists/*
 
 ADD owfs.templ /owfs.templ
