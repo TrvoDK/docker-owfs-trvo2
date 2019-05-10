@@ -8,7 +8,6 @@ MAINTAINER Troels Vognsen <troels@trvo.dk>
 # ADD owserver-pinning /etc/apt/preferences.d/owserver-pinning
 RUN apt-get update && apt-get install -y \
     owserver \
-    owhttpd \
     ow-shell && \
     rm -rf /var/lib/apt/lists/*
 
